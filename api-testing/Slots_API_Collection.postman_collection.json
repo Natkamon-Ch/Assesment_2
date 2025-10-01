@@ -1,0 +1,223 @@
+{
+  "info": {
+    "name": "Therapy Management System - Slots API",
+    "description": "API collection for slot management including creating, updating, and viewing available time slots",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get All Slots",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/slots?therapistId={{therapistId}}&date=2024-01-20&status=available",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "slots"],
+          "query": [
+            {
+              "key": "therapistId",
+              "value": "{{therapistId}}"
+            },
+            {
+              "key": "date",
+              "value": "2024-01-20"
+            },
+            {
+              "key": "status",
+              "value": "available"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Available Slots",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/slots?therapistId=64f8b2c3e1b2a4d5e6f7g8h1&date=2024-01-20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "slots"],
+              "query": [
+                {
+                  "key": "therapistId",
+                  "value": "64f8b2c3e1b2a4d5e6f7g8h1"
+                },
+                {
+                  "key": "date",
+                  "value": "2024-01-20"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [],
+          "body": "{\n  \"status\": \"success\",\n  \"data\": [\n    {\n      \"id\": \"64f8b2c3e1b2a4d5e6f7g8s1\",\n      \"therapistId\": \"64f8b2c3e1b2a4d5e6f7g8h1\",\n      \"date\": \"2024-01-20\",\n      \"startTime\": \"09:00\",\n      \"endTime\": \"10:00\",\n      \"status\": \"available\",\n      \"sessionType\": \"Individual\",\n      \"price\": 150,\n      \"isRecurring\": false\n    },\n    {\n      \"id\": \"64f8b2c3e1b2a4d5e6f7g8s2\",\n      \"therapistId\": \"64f8b2c3e1b2a4d5e6f7g8h1\",\n      \"date\": \"2024-01-20\",\n      \"startTime\": \"14:00\",\n      \"endTime\": \"15:00\",\n      \"status\": \"available\",\n      \"sessionType\": \"Individual\",\n      \"price\": 150,\n      \"isRecurring\": false\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Create Slot",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{therapistToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"date\": \"2024-01-22\",\n  \"startTime\": \"10:00\",\n  \"endTime\": \"11:00\",\n  \"sessionType\": \"Individual\",\n  \"price\": 150,\n  \"isRecurring\": false,\n  \"maxParticipants\": 1,\n  \"notes\": \"Available for new patients\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/slots",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "slots"]
+        }
+      },
+      "response": [
+        {
+          "name": "Slot Created",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{therapistToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date\": \"2024-01-22\",\n  \"startTime\": \"10:00\",\n  \"endTime\": \"11:00\",\n  \"sessionType\": \"Individual\",\n  \"price\": 150\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/slots",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "slots"]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "header": [],
+          "body": "{\n  \"status\": \"success\",\n  \"message\": \"Slot created successfully\",\n  \"data\": {\n    \"id\": \"64f8b2c3e1b2a4d5e6f7g8s3\",\n    \"therapistId\": \"64f8b2c3e1b2a4d5e6f7g8h1\",\n    \"date\": \"2024-01-22\",\n    \"startTime\": \"10:00\",\n    \"endTime\": \"11:00\",\n    \"status\": \"available\",\n    \"sessionType\": \"Individual\",\n    \"price\": 150,\n    \"isRecurring\": false,\n    \"maxParticipants\": 1,\n    \"notes\": \"Available for new patients\",\n    \"createdAt\": \"2024-01-15T15:30:00Z\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Specific Slot",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/slots/{{slotId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "slots", "{{slotId}}"]
+        }
+      },
+      "response": [
+        {
+          "name": "Slot Details",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/slots/64f8b2c3e1b2a4d5e6f7g8s1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "slots", "64f8b2c3e1b2a4d5e6f7g8s1"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [],
+          "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"id\": \"64f8b2c3e1b2a4d5e6f7g8s1\",\n    \"therapist\": {\n      \"id\": \"64f8b2c3e1b2a4d5e6f7g8h1\",\n      \"name\": \"Dr. Sarah Johnson\",\n      \"specializations\": [\"Anxiety\", \"Depression\"]\n    },\n    \"date\": \"2024-01-20\",\n    \"startTime\": \"09:00\",\n    \"endTime\": \"10:00\",\n    \"status\": \"available\",\n    \"sessionType\": \"Individual\",\n    \"price\": 150,\n    \"isRecurring\": false,\n    \"maxParticipants\": 1,\n    \"currentBookings\": 0\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Update Slot",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{therapistToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"startTime\": \"10:30\",\n  \"endTime\": \"11:30\",\n  \"price\": 160,\n  \"status\": \"available\",\n  \"notes\": \"Updated time slot with new pricing\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/slots/{{slotId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "slots", "{{slotId}}"]
+        }
+      },
+      "response": [
+        {
+          "name": "Slot Updated",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{therapistToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"startTime\": \"10:30\",\n  \"endTime\": \"11:30\",\n  \"price\": 160\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/slots/64f8b2c3e1b2a4d5e6f7g8s1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "slots", "64f8b2c3e1b2a4d5e6f7g8s1"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [],
+          "body": "{\n  \"status\": \"success\",\n  \"message\": \"Slot updated successfully\",\n  \"data\": {\n    \"id\": \"64f8b2c3e1b2a4d5e6f7g8s1\",\n    \"date\": \"2024-01-20\",\n    \"startTime\": \"10:30\",\n    \"endTime\": \"11:30\",\n    \"price\": 160,\n    \"status\": \"available\",\n    \"notes\": \"Updated time slot with new pricing\",\n    \"updatedAt\": \"2024-01-15T16:00:00Z\"\n  }\n}"
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "therapistId",
+      "value": "64f8b2c3e1b2a4d5e6f7g8h1"
+    },
+    {
+      "key": "therapistToken",
+      "value": "therapist_jwt_token_here"
+    },
+    {
+      "key": "slotId",
+      "value": "64f8b2c3e1b2a4d5e6f7g8s1"
+    }
+  ]
+}

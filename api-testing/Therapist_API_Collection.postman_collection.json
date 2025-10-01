@@ -1,0 +1,331 @@
+{
+  "info": {
+    "name": "Therapy Management System - Therapist API",
+    "description": "API collection for therapist management including profile, search, availability and slots",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get All Therapists",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/therapists",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "therapists"]
+        }
+      },
+      "response": [
+        {
+          "name": "Therapists List",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/therapists",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "therapists"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [],
+          "body": "{\n  \"status\": \"success\",\n  \"data\": [\n    {\n      \"id\": \"64f8b2c3e1b2a4d5e6f7g8h1\",\n      \"name\": \"Dr. Sarah Johnson\",\n      \"email\": \"sarah.johnson@therapy.com\",\n      \"specializations\": [\"Anxiety\", \"Depression\", \"PTSD\"],\n      \"experience\": 8,\n      \"rating\": 4.8,\n      \"availability\": true,\n      \"profileImage\": \"/uploads/therapists/sarah-johnson.jpg\"\n    },\n    {\n      \"id\": \"64f8b2c3e1b2a4d5e6f7g8h2\",\n      \"name\": \"Dr. Michael Chen\",\n      \"email\": \"michael.chen@therapy.com\",\n      \"specializations\": [\"Couples Therapy\", \"Family Counseling\"],\n      \"experience\": 12,\n      \"rating\": 4.9,\n      \"availability\": true,\n      \"profileImage\": \"/uploads/therapists/michael-chen.jpg\"\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Search Therapists",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/therapists/search?specialization=Anxiety&location=New York&availability=true",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "therapists", "search"],
+          "query": [
+            {
+              "key": "specialization",
+              "value": "Anxiety"
+            },
+            {
+              "key": "location",
+              "value": "New York"
+            },
+            {
+              "key": "availability",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Search Results",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/therapists/search?specialization=Anxiety",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "therapists", "search"],
+              "query": [
+                {
+                  "key": "specialization",
+                  "value": "Anxiety"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [],
+          "body": "{\n  \"status\": \"success\",\n  \"data\": [\n    {\n      \"id\": \"64f8b2c3e1b2a4d5e6f7g8h1\",\n      \"name\": \"Dr. Sarah Johnson\",\n      \"specializations\": [\"Anxiety\", \"Depression\", \"PTSD\"],\n      \"experience\": 8,\n      \"rating\": 4.8,\n      \"availability\": true,\n      \"location\": \"New York, NY\"\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Therapist Profile",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/therapists/{{therapistId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "therapists", "{{therapistId}}"]
+        }
+      },
+      "response": [
+        {
+          "name": "Therapist Profile",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/therapists/64f8b2c3e1b2a4d5e6f7g8h1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "therapists", "64f8b2c3e1b2a4d5e6f7g8h1"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [],
+          "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"id\": \"64f8b2c3e1b2a4d5e6f7g8h1\",\n    \"name\": \"Dr. Sarah Johnson\",\n    \"email\": \"sarah.johnson@therapy.com\",\n    \"specializations\": [\"Anxiety\", \"Depression\", \"PTSD\"],\n    \"experience\": 8,\n    \"rating\": 4.8,\n    \"bio\": \"Dr. Sarah Johnson is a licensed clinical psychologist with over 8 years of experience...\",\n    \"education\": [\"PhD Psychology - Stanford University\", \"MA Clinical Psychology - UCLA\"],\n    \"certifications\": [\"Licensed Clinical Psychologist\", \"EMDR Certified\"],\n    \"languages\": [\"English\", \"Spanish\"],\n    \"sessionTypes\": [\"Individual\", \"Group\", \"Online\"],\n    \"hourlyRate\": 150,\n    \"availability\": true,\n    \"profileImage\": \"/uploads/therapists/sarah-johnson.jpg\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Therapist Slots",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/therapists/{{therapistId}}/slots?date=2024-01-20&status=available",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "therapists", "{{therapistId}}", "slots"],
+          "query": [
+            {
+              "key": "date",
+              "value": "2024-01-20"
+            },
+            {
+              "key": "status",
+              "value": "available"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Therapist Available Slots",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/therapists/64f8b2c3e1b2a4d5e6f7g8h1/slots?date=2024-01-20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "therapists", "64f8b2c3e1b2a4d5e6f7g8h1", "slots"],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "2024-01-20"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [],
+          "body": "{\n  \"status\": \"success\",\n  \"data\": [\n    {\n      \"id\": \"64f8b2c3e1b2a4d5e6f7g8s1\",\n      \"therapistId\": \"64f8b2c3e1b2a4d5e6f7g8h1\",\n      \"date\": \"2024-01-20\",\n      \"startTime\": \"09:00\",\n      \"endTime\": \"10:00\",\n      \"status\": \"available\",\n      \"sessionType\": \"Individual\",\n      \"price\": 150\n    },\n    {\n      \"id\": \"64f8b2c3e1b2a4d5e6f7g8s2\",\n      \"therapistId\": \"64f8b2c3e1b2a4d5e6f7g8h1\",\n      \"date\": \"2024-01-20\",\n      \"startTime\": \"14:00\",\n      \"endTime\": \"15:00\",\n      \"status\": \"available\",\n      \"sessionType\": \"Individual\",\n      \"price\": 150\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get My Therapist Profile",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{therapistToken}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/therapists/me/profile",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "therapists", "me", "profile"]
+        }
+      },
+      "response": [
+        {
+          "name": "My Profile",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{therapistToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/therapists/me/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "therapists", "me", "profile"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [],
+          "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"id\": \"64f8b2c3e1b2a4d5e6f7g8h1\",\n    \"name\": \"Dr. Sarah Johnson\",\n    \"email\": \"sarah.johnson@therapy.com\",\n    \"role\": \"therapist\",\n    \"specializations\": [\"Anxiety\", \"Depression\", \"PTSD\"],\n    \"experience\": 8,\n    \"bio\": \"Licensed clinical psychologist...\",\n    \"availability\": true\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Update Therapist Profile",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{therapistToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"bio\": \"Updated bio with more experience in trauma therapy\",\n  \"specializations\": [\"Anxiety\", \"Depression\", \"PTSD\", \"Trauma Therapy\"],\n  \"hourlyRate\": 160,\n  \"languages\": [\"English\", \"Spanish\", \"French\"]\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/therapists/me/profile",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "therapists", "me", "profile"]
+        }
+      },
+      "response": [
+        {
+          "name": "Profile Updated",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{therapistToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bio\": \"Updated bio with more experience in trauma therapy\",\n  \"specializations\": [\"Anxiety\", \"Depression\", \"PTSD\", \"Trauma Therapy\"]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/therapists/me/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "therapists", "me", "profile"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [],
+          "body": "{\n  \"status\": \"success\",\n  \"message\": \"Profile updated successfully\",\n  \"data\": {\n    \"id\": \"64f8b2c3e1b2a4d5e6f7g8h1\",\n    \"bio\": \"Updated bio with more experience in trauma therapy\",\n    \"specializations\": [\"Anxiety\", \"Depression\", \"PTSD\", \"Trauma Therapy\"],\n    \"updatedAt\": \"2024-01-15T12:30:00Z\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Update Therapist Availability",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{therapistToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"availability\": {\n    \"monday\": [\"09:00-17:00\"],\n    \"tuesday\": [\"09:00-17:00\"],\n    \"wednesday\": [\"09:00-13:00\"],\n    \"thursday\": [\"09:00-17:00\"],\n    \"friday\": [\"09:00-15:00\"],\n    \"saturday\": [],\n    \"sunday\": []\n  },\n  \"timeZone\": \"America/New_York\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/therapists/me/availability",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "therapists", "me", "availability"]
+        }
+      },
+      "response": [
+        {
+          "name": "Availability Updated",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{therapistToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"availability\": {\n    \"monday\": [\"09:00-17:00\"],\n    \"tuesday\": [\"09:00-17:00\"]\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/therapists/me/availability",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "therapists", "me", "availability"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [],
+          "body": "{\n  \"status\": \"success\",\n  \"message\": \"Availability updated successfully\",\n  \"data\": {\n    \"availability\": {\n      \"monday\": [\"09:00-17:00\"],\n      \"tuesday\": [\"09:00-17:00\"],\n      \"wednesday\": [\"09:00-13:00\"],\n      \"thursday\": [\"09:00-17:00\"],\n      \"friday\": [\"09:00-15:00\"]\n    },\n    \"updatedAt\": \"2024-01-15T13:00:00Z\"\n  }\n}"
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "therapistId",
+      "value": "64f8b2c3e1b2a4d5e6f7g8h1"
+    },
+    {
+      "key": "therapistToken",
+      "value": "therapist_jwt_token_here"
+    }
+  ]
+}

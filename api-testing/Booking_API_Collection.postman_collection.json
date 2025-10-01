@@ -1,0 +1,173 @@
+{
+  "info": {
+    "name": "Therapy Management System - Booking API",
+    "description": "API collection for booking management including creating, viewing, and canceling appointments",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Booking",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"therapistId\": \"64f8b2c3e1b2a4d5e6f7g8h1\",\n  \"slotId\": \"64f8b2c3e1b2a4d5e6f7g8s1\",\n  \"sessionType\": \"Individual\",\n  \"notes\": \"First session - anxiety and stress management\",\n  \"paymentMethod\": \"card\",\n  \"paymentDetails\": {\n    \"cardNumber\": \"**** **** **** 1234\",\n    \"amount\": 150\n  }\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/bookings",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "bookings"]
+        }
+      },
+      "response": [
+        {
+          "name": "Booking Created",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"therapistId\": \"64f8b2c3e1b2a4d5e6f7g8h1\",\n  \"slotId\": \"64f8b2c3e1b2a4d5e6f7g8s1\",\n  \"sessionType\": \"Individual\",\n  \"notes\": \"First session - anxiety and stress management\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/bookings",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "bookings"]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "header": [],
+          "body": "{\n  \"status\": \"success\",\n  \"message\": \"Booking created successfully\",\n  \"data\": {\n    \"booking\": {\n      \"id\": \"64f8b2c3e1b2a4d5e6f7g8b1\",\n      \"patientId\": \"64f8b2c3e1b2a4d5e6f7g8h9\",\n      \"therapistId\": \"64f8b2c3e1b2a4d5e6f7g8h1\",\n      \"slotId\": \"64f8b2c3e1b2a4d5e6f7g8s1\",\n      \"sessionType\": \"Individual\",\n      \"status\": \"confirmed\",\n      \"date\": \"2024-01-20\",\n      \"startTime\": \"09:00\",\n      \"endTime\": \"10:00\",\n      \"amount\": 150,\n      \"paymentStatus\": \"paid\",\n      \"notes\": \"First session - anxiety and stress management\",\n      \"createdAt\": \"2024-01-15T14:30:00Z\"\n    },\n    \"confirmationNumber\": \"BK-20240115-001\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get My Bookings",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/bookings/my?status=confirmed&limit=10&page=1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "bookings", "my"],
+          "query": [
+            {
+              "key": "status",
+              "value": "confirmed"
+            },
+            {
+              "key": "limit",
+              "value": "10"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "My Bookings List",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/bookings/my",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "bookings", "my"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [],
+          "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"bookings\": [\n      {\n        \"id\": \"64f8b2c3e1b2a4d5e6f7g8b1\",\n        \"therapist\": {\n          \"id\": \"64f8b2c3e1b2a4d5e6f7g8h1\",\n          \"name\": \"Dr. Sarah Johnson\",\n          \"specializations\": [\"Anxiety\", \"Depression\"]\n        },\n        \"date\": \"2024-01-20\",\n        \"startTime\": \"09:00\",\n        \"endTime\": \"10:00\",\n        \"sessionType\": \"Individual\",\n        \"status\": \"confirmed\",\n        \"amount\": 150,\n        \"paymentStatus\": \"paid\",\n        \"confirmationNumber\": \"BK-20240115-001\"\n      },\n      {\n        \"id\": \"64f8b2c3e1b2a4d5e6f7g8b2\",\n        \"therapist\": {\n          \"id\": \"64f8b2c3e1b2a4d5e6f7g8h2\",\n          \"name\": \"Dr. Michael Chen\",\n          \"specializations\": [\"Couples Therapy\"]\n        },\n        \"date\": \"2024-01-25\",\n        \"startTime\": \"14:00\",\n        \"endTime\": \"15:00\",\n        \"sessionType\": \"Couples\",\n        \"status\": \"confirmed\",\n        \"amount\": 200,\n        \"paymentStatus\": \"paid\",\n        \"confirmationNumber\": \"BK-20240115-002\"\n      }\n    ],\n    \"pagination\": {\n      \"currentPage\": 1,\n      \"totalPages\": 1,\n      \"totalBookings\": 2,\n      \"limit\": 10\n    }\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Cancel Booking",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/bookings/{{bookingId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "bookings", "{{bookingId}}"]
+        }
+      },
+      "response": [
+        {
+          "name": "Booking Cancelled",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/bookings/64f8b2c3e1b2a4d5e6f7g8b1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "bookings", "64f8b2c3e1b2a4d5e6f7g8b1"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [],
+          "body": "{\n  \"status\": \"success\",\n  \"message\": \"Booking cancelled successfully\",\n  \"data\": {\n    \"booking\": {\n      \"id\": \"64f8b2c3e1b2a4d5e6f7g8b1\",\n      \"status\": \"cancelled\",\n      \"cancellationDate\": \"2024-01-16T10:00:00Z\",\n      \"refundStatus\": \"processed\",\n      \"refundAmount\": 150\n    },\n    \"refundInfo\": {\n      \"amount\": 150,\n      \"method\": \"original_payment_method\",\n      \"expectedProcessingTime\": \"3-5 business days\"\n    }\n  }\n}"
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "token",
+      "value": "patient_jwt_token_here"
+    },
+    {
+      "key": "bookingId",
+      "value": "64f8b2c3e1b2a4d5e6f7g8b1"
+    }
+  ]
+}
