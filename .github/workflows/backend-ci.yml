@@ -102,7 +102,7 @@ jobs:
           PORT: 3001
 
       - name: Upload test coverage
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
           file: ./backend/coverage/lcov.info
           flags: backend
