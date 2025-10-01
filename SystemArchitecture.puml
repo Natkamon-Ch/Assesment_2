@@ -1,0 +1,56 @@
+@startuml
+!theme spacelab
+
+title Mental Health Care Platform - System Architecture
+
+actor Patient as PAT
+actor Therapist as THER
+actor Admin as ADM
+
+rectangle "Frontend (React, Material UI, Bootstrap)" as FE {
+  [Home Page]
+  [Therapist Search]
+  [Booking Dashboard]
+  [Profile Management]
+  [Notifications]
+}
+
+rectangle "Backend API (Node.js, Express)" as BE {
+  [Auth Service]
+  [Therapist Management]
+  [Patient Management]
+  [Slot Management]
+  [Booking Service]
+  [Task Service]
+  [Notification Service]
+  [Admin Controls]
+}
+
+database "MongoDB" as DB {
+  [Users]
+  [Therapists]
+  [Patients]
+  [Slots]
+  [Bookings]
+  [Tasks]
+  [Notifications]
+}
+
+cloud "External Services" as EXT {
+  [Email/SMS Provider]
+  [Payment Gateway]
+}
+
+Patient --> FE : Uses Web UI
+Therapist --> FE : Uses Web UI
+Admin --> FE : Uses Admin UI
+
+FE --> BE : REST API Calls
+BE --> DB : CRUD Operations
+BE --> EXT : Notification, Payment
+
+BE <.. FE : API Responses
+DB <.. BE : Data Results
+EXT <.. BE : Service Responses
+
+@enduml
